@@ -6,6 +6,7 @@
     android:layout_margin="1dp"
     android:background="@drawable/item_circular_color_gray_background"
     android:gravity="center"
+    android:id="@+id/tvItem"
     android:padding="3dp"
     android:textColor="#212121"
     tools:text="1"
