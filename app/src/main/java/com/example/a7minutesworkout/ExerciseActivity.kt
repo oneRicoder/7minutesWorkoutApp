@@ -137,7 +137,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun restProgressBar(){
         binding?.progressBar?.progress = restProgress
 
-        restTimer = object : CountDownTimer(restTimerDuration*10000,1000){
+        restTimer = object : CountDownTimer(restTimerDuration*1000,1000){
             override fun onTick(p0: Long) {
                 restProgress++
                 binding?.progressBar?.progress = 10 - restProgress
@@ -156,7 +156,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExerciseProgressBar(){
         binding?.progressBarExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(exerciseTimerDuration*30000,1000){
+        exerciseTimer = object : CountDownTimer(exerciseTimerDuration*1000,1000){
             override fun onTick(p0: Long) {
                 exerciseProgress++
                 binding?.progressBarExercise?.progress = 30 - exerciseProgress
@@ -172,8 +172,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     exerciseAdapter!!.notifyDataSetChanged()
                     setUpRestView()
                 }else{
+                    Toast.makeText(this@ExerciseActivity,"check check",Toast.LENGTH_LONG).show()
                     finish()
-                    var intent = Intent(this@ExerciseActivity,FinishActivity::class.java)
+                    val intent = Intent(this@ExerciseActivity,FinishActivity::class.java)
                     startActivity(intent)
                 }
             }
