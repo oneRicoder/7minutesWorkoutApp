@@ -26,6 +26,7 @@ class FinishActivity : AppCompatActivity() {
             finish()
         }
         val historyDao = (application as WorkOutApp).db.historyDao()
+        addDateToDatabase(historyDao)
     }
     private fun addDateToDatabase(historyDao: HistoryDao){
         val c = Calendar.getInstance()
@@ -34,6 +35,7 @@ class FinishActivity : AppCompatActivity() {
 
         val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss",Locale.getDefault())
         val date = sdf.format(dateTime)
+        Log.e("Formatted Date: ",""+date)
 
 
         lifecycleScope.launch {

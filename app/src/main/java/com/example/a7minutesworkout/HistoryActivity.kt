@@ -36,6 +36,11 @@ class HistoryActivity : AppCompatActivity() {
     private fun getAllCompletedDates(historyDao: HistoryDao){
         lifecycleScope.launch {
             historyDao.fetchAllDates().collect { allCompleteddates ->
+
+                for (i in allCompleteddates){
+                    Log.e("Date: ", "" + i)
+                }
+
                 if (allCompleteddates.isNotEmpty()){
                     binding?.tvHistory?.visibility = View.VISIBLE
                     binding?.rvHistory?.visibility = View.VISIBLE
@@ -46,8 +51,8 @@ class HistoryActivity : AppCompatActivity() {
                     for (date in allCompleteddates){
                         dates.add(date.date)
                     }
-                    val historyAdapter = HistoryAdapter(dates)
-                    binding?.rvHistory?.adapter
+                    val historyAdapter = HistoryAdapter(ArrayList(dates))
+                    binding?.rvHistory?.adapter = historyAdapter
                 }else{
                     binding?.tvHistory?.visibility = View.GONE
                     binding?.rvHistory?.visibility = View.GONE

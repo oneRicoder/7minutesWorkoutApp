@@ -21,12 +21,12 @@ import kotlin.collections.ArrayList
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var binding:  ActivityExerciseBinding? = null
 
-    private var restTimerDuration: Long = 1
+    private var restTimerDuration: Long = 10
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
 
     private var exerciseTimer: CountDownTimer? = null
-    private var exerciseTimerDuration: Long = 1
+    private var exerciseTimerDuration: Long = 30
     private var exerciseProgress = 0
 
     private var exerciseList:ArrayList<ExerciseModel>? = null
@@ -48,14 +48,13 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
-        exerciseList = Constants.defaultExerciseList()
-
         binding?.toolbarExercise?.setNavigationOnClickListener {
             customDialogForBackButton()
         }
-        setUpRestView()
 
         tts = TextToSpeech(this,this)
+        exerciseList = Constants.defaultExerciseList()
+        setUpRestView()
         setupExerciseStatusRecyclerView()
 
     }
@@ -166,13 +165,13 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 //Toast.makeText(this@ExerciseActivity,"30 Seconds Are Over, Lets Go To The Rest View",Toast.LENGTH_SHORT).show()
 
 
-                if (currentExercisePosition<exerciseList?.size!!-1){
+                if (currentExercisePosition < exerciseList?.size!!-1){
                     exerciseList!![currentExercisePosition].setIsSelected(false)
                     exerciseList!![currentExercisePosition].setIsCompleted(true)
                     exerciseAdapter!!.notifyDataSetChanged()
                     setUpRestView()
                 }else{
-                    Toast.makeText(this@ExerciseActivity,"check check",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this@ExerciseActivity,"check check",Toast.LENGTH_LONG).show()
                     finish()
                     val intent = Intent(this@ExerciseActivity,FinishActivity::class.java)
                     startActivity(intent)
